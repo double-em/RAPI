@@ -20,15 +20,13 @@ namespace RAPI.Controllers
         {
             _context = context;
         }
-
-        // GET: api/Products
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
         {
             return await _context.Product.ToListAsync();
         }
-
-        // GET: api/Products/5
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
@@ -41,9 +39,7 @@ namespace RAPI.Controllers
 
             return product;
         }
-
-        // PUT: api/Products/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct(int id, Product product)
         {
@@ -72,9 +68,7 @@ namespace RAPI.Controllers
 
             return NoContent();
         }
-
-        // POST: api/Products
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
@@ -83,8 +77,7 @@ namespace RAPI.Controllers
 
             return CreatedAtAction("GetProduct", new { id = product.Id }, product);
         }
-
-        // DELETE: api/Products/5
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {

@@ -36,7 +36,7 @@ namespace RAPI
             });
 
             services.AddDbContext<RAPIContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("RAPIContext")));
+                    options.UseSqlite(Configuration.GetConnectionString("RAPIContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
