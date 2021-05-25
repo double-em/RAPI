@@ -25,7 +25,7 @@ namespace RAPI.Controllers
             return await _context.Category.ToListAsync();
         }
         
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<Category>> GetCategory(int id)
         {
             var category = await _context.Category.FindAsync(id);
@@ -38,7 +38,7 @@ namespace RAPI.Controllers
             return category;
         }
         
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> PutCategory(int id, Category category)
         {
             if (id != category.Id)
@@ -74,7 +74,7 @@ namespace RAPI.Controllers
             return CreatedAtAction("GetCategory", new { id = category.Id }, category);
         }
         
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteCategory(int id)
         {
             var category = await _context.Category.FindAsync(id);

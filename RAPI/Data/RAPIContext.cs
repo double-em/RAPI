@@ -16,5 +16,6 @@ namespace RAPI.Data
 
         public DbSet<Product> Product { get; set; }
         public DbSet<Category> Category { get; set; }
+        public DbSet<RAPI.Models.Supplier> Supplier { get; set; }
     }
 }

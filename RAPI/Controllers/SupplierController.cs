@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,43 +12,43 @@ namespace RAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class SupplierController : ControllerBase
     {
         private readonly RAPIContext _context;
 
-        public ProductsController(RAPIContext context)
+        public SupplierController(RAPIContext context)
         {
             _context = context;
         }
         
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
+        public async Task<ActionResult<IEnumerable<Supplier>>> GetSupplier()
         {
-            return await _context.Product.ToListAsync();
+            return await _context.Supplier.ToListAsync();
         }
         
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<Supplier>> GetSupplier(int id)
         {
-            var product = await _context.Product.FindAsync(id);
+            var supplier = await _context.Supplier.FindAsync(id);
 
-            if (product == null)
+            if (supplier == null)
             {
                 return NotFound();
             }
 
-            return product;
+            return supplier;
         }
         
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> PutProduct(int id, Product product)
+        public async Task<IActionResult> PutSupplier(int id, Supplier supplier)
         {
-            if (id != product.Id)
+            if (id != supplier.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(product).State = EntityState.Modified;
+            _context.Entry(supplier).State = EntityState.Modified;
 
             try
             {
@@ -56,7 +56,7 @@ namespace RAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductExists(id))
+                if (!SupplierExists(id))
                 {
                     return NotFound();
                 }
@@ -66,34 +66,34 @@ namespace RAPI.Controllers
 
             return NoContent();
         }
-        
+
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
+        public async Task<ActionResult<Supplier>> PostSupplier(Supplier supplier)
         {
-            _context.Product.Add(product);
+            _context.Supplier.Add(supplier);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
+            return CreatedAtAction("GetSupplier", new { id = supplier.Id }, supplier);
         }
         
         [HttpDelete("{id:int}")]
-        public async Task<IActionResult> DeleteProduct(int id)
+        public async Task<IActionResult> DeleteSupplier(int id)
         {
-            var product = await _context.Product.FindAsync(id);
-            if (product == null)
+            var supplier = await _context.Supplier.FindAsync(id);
+            if (supplier == null)
             {
                 return NotFound();
             }
 
-            _context.Product.Remove(product);
+            _context.Supplier.Remove(supplier);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ProductExists(int id)
+        private bool SupplierExists(int id)
         {
-            return _context.Product.Any(e => e.Id == id);
+            return _context.Supplier.Any(e => e.Id == id);
         }
     }
 }
